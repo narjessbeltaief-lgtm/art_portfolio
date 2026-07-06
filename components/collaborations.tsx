@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function Collaborations() {
   const collaborations = [
     {
@@ -37,10 +39,14 @@ export default function Collaborations() {
             >
               <div className="mb-8 overflow-hidden rounded-3xl border border-white/20 shadow-sm transition-all duration-300 hover:shadow-2xl">
                 {collab.image ? (
-                  <img
+                  <Image
                     src={collab.image}
                     alt={collab.title}
+                    width={800}
+                    height={600}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="h-auto w-full object-contain"
+                    loading="lazy"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-white/10">
