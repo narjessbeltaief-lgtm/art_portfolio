@@ -167,6 +167,12 @@
   }
   html {
     @apply font-sans;
+    overflow-x: hidden;
+  }
+
+  body {
+    min-width: 0;
+    overflow-x: hidden;
   }
 }
 
