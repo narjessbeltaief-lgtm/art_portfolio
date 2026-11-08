@@ -38,7 +38,10 @@ export default function Illustrations() {
                 alt={`Illustration ${illustration.id}`}
                 width={1200}
                 height={1600}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="block h-auto w-full rounded-[1.5rem] border border-white/20 bg-white/10 object-cover"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           ))}

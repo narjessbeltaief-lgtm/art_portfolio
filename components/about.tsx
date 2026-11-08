@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 
 const softwareTools = [
   {
@@ -30,45 +29,15 @@ const softwareTools = [
   },
 ]
 
-function LogoImage({ candidates }: { candidates: string[] }) {
-  const [resolvedSrc, setResolvedSrc] = useState<string | null>(null)
-
-  useEffect(() => {
-    let cancelled = false
-
-    const resolve = async () => {
-      for (const candidate of candidates) {
-        try {
-          const response = await fetch(candidate, { method: 'HEAD' })
-          if (response.ok && !cancelled) {
-            setResolvedSrc(candidate)
-            return
-          }
-        } catch {
-          // Try the next candidate
-        }
-      }
-
-      if (!cancelled) {
-        setResolvedSrc('/placeholder-logo.svg')
-      }
-    }
-
-    resolve()
-
-    return () => {
-      cancelled = true
-    }
-  }, [candidates])
-
+function LogoImage({ src, alt }: { src: string; alt: string }) {
   return (
     <Image
-      src={resolvedSrc ?? '/placeholder-logo.svg'}
-      alt="Software logo"
+      src={src}
+      alt={alt}
       width={48}
       height={48}
       className="h-full w-full rounded-[1.2rem] object-contain"
-      unoptimized
+      loading="lazy"
     />
   )
 }
@@ -114,7 +83,7 @@ export default function About() {
                 style={{ animationDelay: `${(softwareTools.findIndex((item) => item.name === tool.name) + 1) * 0.12}s` }}
               >
                 <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-[2rem] p-1">
-                  <LogoImage candidates={tool.candidates} />
+                  <LogoImage src={tool.candidates[0]} alt={`${tool.name} logo`} />
                 </div>
                 <p className="text-sm font-semibold text-coffee md:text-base">{tool.name}</p>
               </div>

@@ -11,6 +11,7 @@ export default function Hero() {
           height={260}
           priority
           className="mx-auto h-auto w-full max-w-[min(90vw,900px)]"
+          style={{ width: '100%', height: 'auto' }}
         />
       </div>
     </section>
